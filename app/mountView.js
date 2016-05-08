@@ -1,5 +1,5 @@
-import HelloForm from './HelloForm';
+import router from './Router';
 import React from 'react';
 import ReactDom from 'react-dom';
-
-ReactDom.render(<HelloForm />,document.getElementById('container'));
+import { Router, browserHistory } from 'react-router'
+ReactDom.render(<Router router={router} history={browserHistory}/>,document.getElementById('container'));
