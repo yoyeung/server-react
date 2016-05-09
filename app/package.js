@@ -1,4 +1,5 @@
 import React from 'react';
+import './sass/HelloForm.scss';
 import { Router, Route,IndexRoute,NotFoundRoute,Redirect,Link, browserHistory } from 'react-router'
 export class  App extends React.Component{
   constructor(){
@@ -7,8 +8,8 @@ export class  App extends React.Component{
   render(){
     return (
       <div>
-        <h1>Wellcome home 12</h1>
-        <Link to='/moses/contact'>Contact US</Link> 
+        <h1>Wellcome home</h1>
+        <Link to='/moses/contact'>Contact US</Link>
         <Link to='/moses/about'>About</Link>
         {this.props.children}
       </div>

@@ -28,6 +28,11 @@ module.exports= {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ],
+  // plugins: [
+  //   new ExtractTextPlugin('dist/css/app.css', {
+  //           allChunks: true
+  //       })
+  // ],
   postcss: function() {
     return [require('autoprefixer')];
   },
@@ -39,7 +44,8 @@ module.exports= {
     },
     {
         test: /\.scss$/,
-        loader: "style-loader!css-loader!postcss-loader!sass-loader"
+        loaders: ["style","css","postcss","sass"]
     }]
   }
 };
+require.extensions['.scss'] = function () {}

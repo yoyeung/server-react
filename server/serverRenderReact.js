@@ -1,4 +1,4 @@
-import React from 'react/addons';
+import React from 'react';
 import { renderToString } from 'react-dom/server';
 // and these to match the url to routes and then render
 import { match, RouterContext } from 'react-router';
@@ -11,7 +11,7 @@ function renderPage(appHtml) {
     <head>
     <meta charset=utf-8/>
     <title>My First React Router App</title>
-    <link rel=stylesheet href=/index.css>
+    
     <head>
     <body>
     <div id='container'>${appHtml}</div>
