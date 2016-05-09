@@ -2,11 +2,11 @@ const path = require( 'path');
 const fs = require('fs');
 const webpack = require( 'webpack');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var autoprefixer = require('autoprefixer');
+// var autoprefixer = require('autoprefixer');
 var precss = require('precss');
 function getEntrySource(sources){
   if (process.env.NODE_ENV !== 'production') {
-        sources.push('webpack-dev-server/client?http://0.0.0.0:3001');
+        sources.push('webpack-dev-server/client?http://0.0.0.0:8989');
         sources.push('webpack/hot/only-dev-server');
         // sources.push('webpack-hot-middleware/client?http://0.0.0.0:3000');
     }
@@ -29,7 +29,7 @@ module.exports= {
     new webpack.NoErrorsPlugin()
   ],
   postcss: function() {
-    return [autoprefixer];
+    return [require('autoprefixer')];
   },
   module: {
     loaders: [{

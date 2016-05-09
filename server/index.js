@@ -11,17 +11,17 @@ if(process.env.NODE_ENV !== 'production'){
     publicPath: config.output.publicPath,
     proxy:{
       "*":{
-        target:"http://localhost:3000"
+        target:"http://localhost:8888"
       }
     },
     hot: true,
     historyApiFallback: true
-  }).listen(3001, 'localhost', function (err, result) {
+  }).listen(8989, 'localhost', function (err, result) {
     if (err) {
       return console.log(err);
     }
 
-    console.log('Listening at http://localhost:3000/');
+    console.log('Listening at http://localhost:8989/');
   });
 }else{
   app.use('/js',express.static('dist'));
@@ -35,4 +35,4 @@ router.get('*',serverRender);
 
 app.use(router);
 
-app.listen(3000,()=> console.log('listening on 3000'));
+app.listen(8888,()=> console.log('listening on 8888'));
