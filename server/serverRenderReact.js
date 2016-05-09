@@ -8,11 +8,16 @@ function renderPage(appHtml) {
   return `
     <!doctype html public="storage">
     <html>
+    <head>
     <meta charset=utf-8/>
     <title>My First React Router App</title>
     <link rel=stylesheet href=/index.css>
+    <head>
+    <body>
     <div id='container'>${appHtml}</div>
     <script src="/js/bundle.js"></script>
+    </body>
+    </html>
    `
 }
 
