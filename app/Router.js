@@ -1,14 +1,17 @@
 import React from 'react';
-import {App,ContactUS,ContactUSD,About} from './package'
-import { Router, Route,IndexRoute,NotFoundRoute,Redirect } from 'react-router'
+import {App,ContactUS,ContactUSD,About} from './components';
+import { Router, Route,IndexRoute,NotFoundRoute,Redirect } from 'react-router';
+import reducer from './reducers';
+
+
 
 export default (
 
-    <Route  path='/moses' component={App}>
-      <Route path='/moses/contact' component={ContactUS}>
-          <Route path='/moses/contact/detail' component={ContactUSD}/>
+    <Route  path='/' component={App}>
+      <Route path='/contact' component={ContactUS}>
+          <Route path='detail' component={ContactUSD}/>
       </Route>
-      <Route path='/moses/about' component={About}/>
+      <Route path='/about' component={About}/>
     </Route>
 
 );

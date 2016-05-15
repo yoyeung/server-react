@@ -1,21 +1,30 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 // and these to match the url to routes and then render
-import { match, RouterContext } from 'react-router';
+import {createMemoryHistory, match, RouterContext ,useRouterHistory } from 'react-router';
+import { createHistory, useBasename } from 'history'
+import {  combineReducers, applyMiddleware } from 'redux';
+import {Provider} from 'react-redux'
 import routes from '../app/Router';
+import {configureStore} from '../store';
+import { syncHistoryWithStore } from 'react-router-redux';
+import serialize from 'serialize-javascript';
 
-function renderPage(appHtml) {
+function renderPage(appHtml,store) {
   return `
     <!doctype html public="storage">
     <html>
     <head>
     <meta charset=utf-8/>
     <title>My First React Router App</title>
-    
+
     <head>
     <body>
     <div id='container'>${appHtml}</div>
     <script src="/js/bundle.js"></script>
+    <script >
+      window.__initialState__=${serialize(store.getState())};
+    </script>
     </body>
     </html>
    `
@@ -23,7 +32,13 @@ function renderPage(appHtml) {
 
 
 export default (req,res)=>{
-  match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
+  const memoryHistory = createMemoryHistory(req.url);
+  const store = configureStore(memoryHistory);
+  const history = syncHistoryWithStore(memoryHistory, store);
+  // const history = useRouterHistory(useBasename(createHistory))({
+  //   basename: "moses"
+  // });
+  match({history, routes, location: req.url }, (error, redirectLocation, renderProps) => {
     if (error) {
       console.log('Error', error);
       res.status(500).send(error);
@@ -32,24 +47,15 @@ export default (req,res)=>{
     } else if (renderProps) {
       // const devTools = (isDev) ? <DevTools /> : null;
       const html = renderToString(
-        <RouterContext {...renderProps} />
+        <Provider store={store}>
+           <RouterContext {...renderProps} />
+        </Provider>
       );
       // res.render('index', { isProd: (!isDev), html: html });
-      res.send(renderPage(html))
+      res.send(renderPage(html,store))
     } else {
       res.status(404).send('Not Found');
     }
   });
-  // match({ routes: routes, location: req.url }, (err, redirect, props) => {
-  //   // `RouterContext` is the what `Router` renders. `Router` keeps these
-  //   // `props` in its state as it listens to `browserHistory`. But on the
-  //   // server our app is stateless, so we need to use `match` to
-  //   // get these props before rendering.
-  //   const appHtml = renderToString(<RouterContext {...props}/>)
-  //
-  //   // dump the HTML into a template, lots of ways to do this, but none are
-  //   // really influenced by React Router, so we're just using a little
-  //   // function, `renderPage`
-  //   res.send(renderPage(appHtml))
-  // })
+
 }

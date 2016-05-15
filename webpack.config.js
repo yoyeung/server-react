@@ -12,10 +12,18 @@ function getEntrySource(sources){
     }
   return sources;
 }
+function getDevTools(){
+  if (process.env.NODE_ENV !== 'production') {
+        return 'cheap-module-eval-source-map';
+  }else{
+    return 'cheap-module-source-map';
+  }
+
+}
 module.exports= {
 
   // Gives you sourcemaps without slowing down rebundling
-  devtool: 'cheap-module-eval-source-map',
+  devtool: getDevTools(),
   entry: getEntrySource([path.join(__dirname, 'app')]),
   output: {
     path: path.join(__dirname, '/dist/'),

@@ -31,8 +31,8 @@ app.set('view engine','jade');
 
 
 var router =express.Router();
-router.get('*',serverRender);
-// router.get("*",(req,res)=> res.render('index'));
+// router.get('*',serverRender);
+router.get("*",(req,res)=> res.render('index'));
 
 app.use(router);
 
