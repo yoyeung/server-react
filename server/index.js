@@ -28,6 +28,7 @@ if(process.env.NODE_ENV !== 'production'){
 }
 app.set('views',path.join(process.cwd(),'views'));
 app.set('view engine','jade');
+app.use('/fonts',express.static('fonts'));
 
 
 var router =express.Router();

@@ -1,5 +1,13 @@
-export {About} from './About';
-export {App} from './App';
-export ContactUS from './ContactUS';
-export {ContactUSD} from './ContactUSD';
-export {NotFound} from './NotFound';
+import {About} from './About';
+import {App} from './App';
+import ContactUS from './ContactUS';
+import {ContactUSD} from './ContactUSD';
+import {NotFound} from './NotFound';
+
+export {
+  About,
+  App,
+  ContactUS,
+  ContactUSD,
+  NotFound
+}

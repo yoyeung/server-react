@@ -8,17 +8,17 @@ import {addCounterOne} from '../actions';
     super();
   }
   componentDidMount(){
-    setInterval(
-      ()=>{
-        this.props.tick();
-      },1000
-    );
+    // setInterval(
+    //   ()=>{
+    //     this.props.tick();
+    //   },1000
+    // );
   }
   render(){
 
     return (
       <div>
-        <h1>Wellcome home {this.props.counter}++</h1>
+        <h1>Wellcome home</h1>
         <Link to='contact'>Contact US</Link>
         <Link to='about'>About</Link>
         {this.props.children}
